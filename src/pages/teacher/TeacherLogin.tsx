@@ -55,7 +55,7 @@ const TeacherLogin = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputTarget>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
