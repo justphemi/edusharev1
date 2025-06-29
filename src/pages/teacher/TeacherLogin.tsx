@@ -1,32 +1,61 @@
-
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { BookOpen, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 
 const TeacherLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
   const { toast } = useToast();
+  const { signIn, user } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (user) {
+      navigate('/teacher/dashboard');
+    }
+  }, [user, navigate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder for authentication logic
-    toast({
-      title: "Login attempted",
-      description: "Connect to Supabase to enable authentication functionality.",
-    });
-    console.log("Teacher login attempt:", formData);
+    setLoading(true);
+
+    try {
+      const { error } = await signIn(formData.email, formData.password);
+
+      if (error) {
+        toast({
+          title: "Login failed",
+          description: error.message,
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Login successful!",
+          description: "Welcome back to Scholar Share Zone.",
+        });
+      }
+    } catch (error: any) {
+      toast({
+        title: "Login failed",
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputTarget>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -48,7 +77,7 @@ const TeacherLogin = () => {
           <CardHeader className="text-center">
             <CardTitle className="text-2xl text-gray-900">Teacher Login</CardTitle>
             <CardDescription>
-              Access your dashboard to manage materials
+              Access your teaching dashboard and materials
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -94,8 +123,12 @@ const TeacherLogin = () => {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
-                Sign In
+              <Button 
+                type="submit" 
+                className="w-full bg-green-600 hover:bg-green-700"
+                disabled={loading}
+              >
+                {loading ? "Signing In..." : "Sign In"}
               </Button>
             </form>
 

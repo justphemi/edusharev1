@@ -9,7 +9,83 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      materials: {
+        Row: {
+          class_level: Database["public"]["Enums"]["class_level"]
+          content: string | null
+          created_at: string
+          description: string | null
+          file_url: string | null
+          id: string
+          subject: string | null
+          teacher_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          class_level: Database["public"]["Enums"]["class_level"]
+          content?: string | null
+          created_at?: string
+          description?: string | null
+          file_url?: string | null
+          id?: string
+          subject?: string | null
+          teacher_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          class_level?: Database["public"]["Enums"]["class_level"]
+          content?: string | null
+          created_at?: string
+          description?: string | null
+          file_url?: string | null
+          id?: string
+          subject?: string | null
+          teacher_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "materials_teacher_id_fkey"
+            columns: ["teacher_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          class_level: Database["public"]["Enums"]["class_level"] | null
+          created_at: string
+          full_name: string
+          id: string
+          role: Database["public"]["Enums"]["user_role"]
+          subject: string | null
+          updated_at: string
+        }
+        Insert: {
+          class_level?: Database["public"]["Enums"]["class_level"] | null
+          created_at?: string
+          full_name: string
+          id: string
+          role: Database["public"]["Enums"]["user_role"]
+          subject?: string | null
+          updated_at?: string
+        }
+        Update: {
+          class_level?: Database["public"]["Enums"]["class_level"] | null
+          created_at?: string
+          full_name?: string
+          id?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          subject?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -18,7 +94,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      class_level: "jss1" | "jss2" | "jss3" | "ss1" | "ss2" | "ss3"
+      user_role: "student" | "teacher"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -133,6 +210,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      class_level: ["jss1", "jss2", "jss3", "ss1", "ss2", "ss3"],
+      user_role: ["student", "teacher"],
+    },
   },
 } as const
