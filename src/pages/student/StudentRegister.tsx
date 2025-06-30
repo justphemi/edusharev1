@@ -97,7 +97,7 @@ const StudentRegister = () => {
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors">
             <BookOpen className="h-8 w-8" />
-            <span className="text-2xl font-bold">Scholar Share Zone</span>
+            <span className="text-2xl font-bold">Evangel Seminary</span>
           </Link>
         </div>
 

@@ -12,7 +12,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <BookOpen className="h-8 w-8 text-blue-600" />
-            <h1 className="text-2xl font-bold text-gray-900">Scholar Share Zone</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Evangel Seminary</h1>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
             <Link to="/student/login" className="text-gray-600 hover:text-blue-600 transition-colors">
@@ -81,7 +81,7 @@ const Index = () => {
       <section className="bg-white py-16">
         <div className="container mx-auto px-4">
           <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Why Choose Scholar Share Zone?
+            Why Choose Evangel Seminary?
           </h3>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -117,7 +117,7 @@ const Index = () => {
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <BookOpen className="h-6 w-6" />
-            <span className="text-lg font-semibold">Scholar Share Zone</span>
+            <span className="text-lg font-semibold">Evangel Seminary</span>
           </div>
           <p className="text-gray-400">Empowering education through shared knowledge.</p>
         </div>
